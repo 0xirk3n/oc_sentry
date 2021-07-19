@@ -21,12 +21,8 @@
 
                         if(!empty(SENTRY_PHP)){
 
-                            $sentryDNS = SENTRY_PHP;
-                            $client = new Raven_Client("{$sentryDNS}");
-                            $error_handler = new Raven_ErrorHandler($client);
-                            $error_handler->registerExceptionHandler();
-                            $error_handler->registerErrorHandler();
-                            $error_handler->registerShutdownFunction();
+                            Sentry\init(['dsn' => SENTRY_PHP ]);
+                            throw new Exception("My first Sentry error!");
 
                         }else {
                             echo "Please fill your `SENTRY_PHP` constant in config.php";
